@@ -9,7 +9,7 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String id;
+    private int id;
 
     @Column(name="name")
     private String name;
@@ -22,16 +22,16 @@ public class Location {
         this.name = name;
     }
 
-    public Location(String id, String name) {
+    public Location(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
