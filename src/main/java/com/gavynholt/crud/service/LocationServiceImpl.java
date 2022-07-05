@@ -27,4 +27,11 @@ public class LocationServiceImpl implements LocationService {
 
         return locationDAO.getLocationById(locationId);
     }
+
+    @Override
+    @Transactional
+    public void addNewLocation(Location locationToAdd) {
+
+        locationDAO.addNewLocation(locationToAdd);
+    }
 }

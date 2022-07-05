@@ -28,10 +28,13 @@ public class LocationsRestController {
         return locationService.getLocationById(locationId);
     }
 
-//    @PostMapping("locations")
-//    public Location addNewLocation(@RequestBody Location locationToAdd) {
-//        locations.add(locationToAdd);
-//
-//        return locationToAdd;
-//    }
+    @PostMapping("locations")
+    public Location addNewLocation(@RequestBody Location locationToAdd) {
+
+        locationToAdd.setId(0);
+
+        locationService.addNewLocation(locationToAdd);
+
+        return locationToAdd;
+    }
 }

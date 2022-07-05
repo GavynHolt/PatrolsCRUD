@@ -33,4 +33,12 @@ public class LocationDAOImpl implements LocationDAO {
 
         return entityManager.find(Location.class, locationId);
     }
+
+    @Override
+    public void addNewLocation(Location locationToAdd) {
+
+        Location dbLocation = entityManager.merge(locationToAdd);
+
+        locationToAdd.setId(dbLocation.getId());
+    }
 }

@@ -9,4 +9,6 @@ public interface LocationDAO {
     public List<Location> getLocations();
 
     public Location getLocationById(int locationId);
+
+    public void addNewLocation(Location locationToAdd);
 }
