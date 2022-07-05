@@ -1,6 +1,8 @@
 package com.gavynholt.crud.rest;
 
 import com.gavynholt.crud.entity.Location;
+import com.gavynholt.crud.service.LocationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +11,9 @@ import java.util.List;
 
 @RestController
 public class LocationsRestController {
+
+    @Autowired
+    private LocationService locationService;
 
     private List<Location> locations;
 
@@ -27,7 +32,7 @@ public class LocationsRestController {
     @GetMapping("/locations")
     public List<Location> getLocations() {
 
-        return locations;
+        return locationService.getLocations();
     }
 
     @GetMapping("/locations/{locationId}")
