@@ -16,20 +16,6 @@ public class LocationsRestController {
     @Autowired
     private LocationService locationService;
 
-    private List<Location> locations;
-
-    @PostConstruct
-    public void loadData() {
-
-        locations = new ArrayList<>();
-
-        locations.add(new Location(1, "Glory Hole Doughnuts"));
-        locations.add(new Location(2, "Ed's Real Scoop"));
-        locations.add(new Location(3, "Sanremo Bakery"));
-        locations.add(new Location(4, "Tom's Dairy Freeze"));
-        locations.add(new Location(5, "Maurya East Indian Roti"));
-    }
-
     @GetMapping("/locations")
     public List<Location> getLocations() {
 
@@ -42,10 +28,10 @@ public class LocationsRestController {
         return locationService.getLocationById(locationId);
     }
 
-    @PostMapping("locations")
-    public Location addNewLocation(@RequestBody Location locationToAdd) {
-        locations.add(locationToAdd);
-
-        return locationToAdd;
-    }
+//    @PostMapping("locations")
+//    public Location addNewLocation(@RequestBody Location locationToAdd) {
+//        locations.add(locationToAdd);
+//
+//        return locationToAdd;
+//    }
 }
