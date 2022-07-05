@@ -23,8 +23,8 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     @Transactional
-    public Location getLocation(int locationId) {
+    public Location getLocationById(int locationId) {
 
-        return locationDAO.getLocation(locationId);
+        return locationDAO.getLocationById(locationId);
     }
 }

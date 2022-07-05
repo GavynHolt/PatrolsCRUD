@@ -8,5 +8,5 @@ public interface LocationDAO {
 
     public List<Location> getLocations();
 
-    public Location getLocation(int locationId);
+    public Location getLocationById(int locationId);
 }

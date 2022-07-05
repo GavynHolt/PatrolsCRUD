@@ -23,11 +23,11 @@ public class LocationsRestController {
 
         locations = new ArrayList<>();
 
-        locations.add(new Location("1", "Glory Hole Doughnuts"));
-        locations.add(new Location("2", "Ed's Real Scoop"));
-        locations.add(new Location("3", "Sanremo Bakery"));
-        locations.add(new Location("4", "Tom's Dairy Freeze"));
-        locations.add(new Location("5", "Maurya East Indian Roti"));
+        locations.add(new Location(1, "Glory Hole Doughnuts"));
+        locations.add(new Location(2, "Ed's Real Scoop"));
+        locations.add(new Location(3, "Sanremo Bakery"));
+        locations.add(new Location(4, "Tom's Dairy Freeze"));
+        locations.add(new Location(5, "Maurya East Indian Roti"));
     }
 
     @GetMapping("/locations")
@@ -37,9 +37,9 @@ public class LocationsRestController {
     }
 
     @GetMapping("/locations/{locationId}")
-    public Location getLocationById(@PathVariable String locationId) {
+    public Location getLocationById(@PathVariable int locationId) {
 
-        return locations.stream().filter(location -> locationId.equals(location.getId())).findFirst().orElse((null));
+        return locationService.getLocationById(locationId);
     }
 
     @PostMapping("locations")

@@ -29,7 +29,8 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    public Location getLocation(int locationId) {
-        return null;
+    public Location getLocationById(int locationId) {
+
+        return entityManager.find(Location.class, locationId);
     }
 }
