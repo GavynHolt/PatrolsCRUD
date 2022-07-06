@@ -1,14 +1,17 @@
 package com.gavynholt.crud.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name="locations")
+@Table(name="location")
 public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "location_id")
     private int id;
 
     @Column(name="name")
@@ -31,6 +34,12 @@ public class Location {
 
     @Column(name="country")
     private String country;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy="location",
+            cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}
+    )
+    private List<PostOrder> postOrders;
 
     public Location() {
 
@@ -111,6 +120,14 @@ public class Location {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List<PostOrder> getPostOrders() {
+        return postOrders;
+    }
+
+    public void setPostOrders(List<PostOrder> postOrders) {
+        this.postOrders = postOrders;
     }
 
     @Override
