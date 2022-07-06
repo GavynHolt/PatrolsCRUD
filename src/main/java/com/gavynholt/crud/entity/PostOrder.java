@@ -1,6 +1,8 @@
 package com.gavynholt.crud.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -16,6 +18,11 @@ public class PostOrder {
     @Column(name="name")
     private String name;
 
+    @JsonManagedReference
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="date_range_id")
+    private DateRange dateRange;
+
     @JsonBackReference
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="location_id")
@@ -27,6 +34,14 @@ public class PostOrder {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public DateRange getDateRange() {
+        return dateRange;
+    }
+
+    public void setDateRange(DateRange dateRange) {
+        this.dateRange = dateRange;
     }
 
     public Location getLocation() {
