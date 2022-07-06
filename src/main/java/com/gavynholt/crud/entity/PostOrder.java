@@ -23,6 +23,9 @@ public class PostOrder {
     @JoinColumn(name="date_range_id")
     private DateRange dateRange;
 
+    @Column(name="notes")
+    private String notes;
+
     @JsonBackReference
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="location_id")
@@ -42,6 +45,10 @@ public class PostOrder {
 
     public void setDateRange(DateRange dateRange) {
         this.dateRange = dateRange;
+    }
+
+    public String getNotes() {
+        return notes;
     }
 
     public Location getLocation() {
