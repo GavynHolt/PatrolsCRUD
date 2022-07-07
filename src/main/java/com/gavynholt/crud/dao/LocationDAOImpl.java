@@ -1,6 +1,7 @@
 package com.gavynholt.crud.dao;
 
 import com.gavynholt.crud.entity.Location;
+import com.gavynholt.crud.entity.PostOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -40,5 +41,46 @@ public class LocationDAOImpl implements LocationDAO {
         Location dbLocation = entityManager.merge(locationToAdd);
 
         locationToAdd.setId(dbLocation.getId());
+    }
+
+    @Override
+    public List<PostOrder> getPostOrders(int locationId) {
+
+        Query postOrdersQuery = entityManager.createQuery("from PostOrder where location_id=:locationId");
+        postOrdersQuery.setParameter("locationId", locationId);
+
+        List<PostOrder> postOrders = postOrdersQuery.getResultList();
+
+        return postOrders;
+    }
+
+    @Override
+    public PostOrder getPostOrderById(int postOrderId) {
+
+        PostOrder dbPostOrder = entityManager.find(PostOrder.class, postOrderId);
+
+        return dbPostOrder;
+    }
+
+    @Override
+    public void addPostOrder(PostOrder postOrderToAdd) {
+
+        PostOrder dbPostOrder = entityManager.merge(postOrderToAdd);
+
+        postOrderToAdd.setId(dbPostOrder.getId());
+    }
+
+    @Override
+    public void updatePostOrder(PostOrder postOrderToUpdate) {
+
+        entityManager.merge(postOrderToUpdate);
+    }
+
+    @Override
+    public void deletePostOrder(int postOrderId) {
+
+        PostOrder postOrderToDelete = entityManager.find(PostOrder.class, postOrderId);
+
+        entityManager.remove(postOrderToDelete);
     }
 }

@@ -31,6 +31,14 @@ public class PostOrder {
     @JoinColumn(name="location_id")
     private Location location;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -49,6 +57,10 @@ public class PostOrder {
 
     public String getNotes() {
         return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public Location getLocation() {
