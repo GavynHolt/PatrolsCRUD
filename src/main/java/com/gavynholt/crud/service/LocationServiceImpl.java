@@ -38,6 +38,13 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     @Transactional
+    public void deleteLocation(int locationId) {
+
+        locationDAO.deleteLocation(locationId);
+    }
+
+    @Override
+    @Transactional
     public List<PostOrder> getPostOrders(int locationId) {
 
         return locationDAO.getPostOrders(locationId);

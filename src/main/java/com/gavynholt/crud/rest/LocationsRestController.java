@@ -40,6 +40,14 @@ public class LocationsRestController {
         return locationToAdd;
     }
 
+    @DeleteMapping("locations/{locationId}")
+    public String deleteLocation(@PathVariable(value="locationId") int locationId) {
+
+        locationService.deleteLocation(locationId);
+
+        return "Successfully deleted location with id: " + locationId;
+    }
+
     @GetMapping("postorders/location/{locationId}")
     public List<PostOrder> getPostOrders(@PathVariable(value="locationId") int locationId) {
 
@@ -52,7 +60,7 @@ public class LocationsRestController {
         return locationService.getPostOrderById(postOrderId);
     }
 
-    @PostMapping("postorders/location/{locationId}/")
+    @PostMapping("postorders/location/{locationId}")
     public PostOrder addPostOrderToLocation(@PathVariable(value="locationId") int locationId, @RequestBody PostOrder postOrderToAdd) {
 
         postOrderToAdd.setId(0);

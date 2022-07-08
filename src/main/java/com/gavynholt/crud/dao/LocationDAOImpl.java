@@ -44,6 +44,14 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
+    public void deleteLocation(int locationId) {
+
+        Location locationToDelete = entityManager.find(Location.class, locationId);
+
+        entityManager.remove(locationToDelete);
+    }
+
+    @Override
     public List<PostOrder> getPostOrders(int locationId) {
 
         Query postOrdersQuery = entityManager.createQuery("from PostOrder where location_id=:locationId");
