@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="post_order")
@@ -18,10 +19,26 @@ public class PostOrder {
     @Column(name="name")
     private String name;
 
+    @ElementCollection
+    @CollectionTable(
+            name="step",
+            joinColumns=@JoinColumn(name="post_order_id")
+    )
+    @Column(name="name")
+    private List<String> steps;
+
     @JsonManagedReference
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="date_range_id")
     private DateRange dateRange;
+
+    @ElementCollection
+    @CollectionTable(
+            name="recurring",
+            joinColumns=@JoinColumn(name="post_order_id")
+    )
+    @Column(name="day")
+    private List<String> recurring;
 
     @Column(name="notes")
     private String notes;
@@ -47,12 +64,28 @@ public class PostOrder {
         this.name = name;
     }
 
+    public List<String> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(List<String> steps) {
+        this.steps = steps;
+    }
+
     public DateRange getDateRange() {
         return dateRange;
     }
 
     public void setDateRange(DateRange dateRange) {
         this.dateRange = dateRange;
+    }
+
+    public List<String> getRecurring() {
+        return recurring;
+    }
+
+    public void setRecurring(List<String> recurring) {
+        this.recurring = recurring;
     }
 
     public String getNotes() {
