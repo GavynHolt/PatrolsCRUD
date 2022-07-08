@@ -1,7 +1,6 @@
 package com.gavynholt.crud.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -39,6 +38,11 @@ public class PostOrder {
     )
     @Column(name="day")
     private List<String> recurring;
+
+    @OneToMany(mappedBy="patrol",
+            cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}
+    )
+    private List<Patrol> patrols;
 
     @Column(name="notes")
     private String notes;
@@ -86,6 +90,14 @@ public class PostOrder {
 
     public void setRecurring(List<String> recurring) {
         this.recurring = recurring;
+    }
+
+    public List<Patrol> getPatrols() {
+        return patrols;
+    }
+
+    public void setPatrols(List<Patrol> patrols) {
+        this.patrols = patrols;
     }
 
     public String getNotes() {
