@@ -1,7 +1,6 @@
 package com.gavynholt.crud.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -17,20 +16,20 @@ public class Patrol {
     @Column(name="amount")
     private int amount;
 
-    @JsonManagedReference
+//    @JsonManagedReference
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="time_window_id")
-    private DateRange timeWindow;
+    private TimeWindow timeWindow;
 
     @JsonBackReference
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="post_order_id")
-    private Patrol patrol;
+    private PostOrder postOrder;
 
     public Patrol() {
     }
 
-    public Patrol(int amount, DateRange timeWindow) {
+    public Patrol(int amount, TimeWindow timeWindow) {
         this.amount = amount;
         this.timeWindow = timeWindow;
     }
@@ -51,20 +50,20 @@ public class Patrol {
         this.amount = amount;
     }
 
-    public DateRange getTimeWindow() {
+    public TimeWindow getTimeWindow() {
         return timeWindow;
     }
 
-    public void setTimeWindow(DateRange timeWindow) {
+    public void setTimeWindow(TimeWindow timeWindow) {
         this.timeWindow = timeWindow;
     }
 
-    public Patrol getPatrol() {
-        return patrol;
+    public PostOrder getPostOrder() {
+        return postOrder;
     }
 
-    public void setPatrol(Patrol patrol) {
-        this.patrol = patrol;
+    public void setPostOrder(PostOrder postOrder) {
+        this.postOrder = postOrder;
     }
 
     @Override
@@ -73,6 +72,7 @@ public class Patrol {
         sb.append("id=").append(id);
         sb.append(", amount=").append(amount);
         sb.append(", timeWindow=").append(timeWindow);
+        sb.append(", postOrder=").append(postOrder);
         sb.append('}');
         return sb.toString();
     }

@@ -39,7 +39,8 @@ public class PostOrder {
     @Column(name="day")
     private List<String> recurring;
 
-    @OneToMany(mappedBy="patrol",
+    @JsonManagedReference
+    @OneToMany(mappedBy="postOrder",
             cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}
     )
     private List<Patrol> patrols;
@@ -121,6 +122,11 @@ public class PostOrder {
         final StringBuilder sb = new StringBuilder("PostOrder{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
+        sb.append(", steps=").append(steps);
+        sb.append(", dateRange=").append(dateRange);
+        sb.append(", recurring=").append(recurring);
+        sb.append(", patrols=").append(patrols);
+        sb.append(", notes='").append(notes).append('\'');
         sb.append(", location=").append(location);
         sb.append('}');
         return sb.toString();
