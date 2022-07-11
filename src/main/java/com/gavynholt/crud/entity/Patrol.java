@@ -23,7 +23,11 @@ public class Patrol {
     @JsonManagedReference
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="patrol_date_range_id")
-    private DateRange dateRange;
+    private PatrolDateRange dateRange;
+
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="patrol_time_window_id")
+    private PatrolTimeWindow timeWindow;
 
     @ElementCollection
     @CollectionTable(
@@ -68,12 +72,20 @@ public class Patrol {
         this.amount = amount;
     }
 
-    public DateRange getDateRange() {
+    public PatrolDateRange getDateRange() {
         return dateRange;
     }
 
-    public void setDateRange(DateRange dateRange) {
+    public void setDateRange(PatrolDateRange dateRange) {
         this.dateRange = dateRange;
+    }
+
+    public PatrolTimeWindow getTimeWindow() {
+        return timeWindow;
+    }
+
+    public void setTimeWindow(PatrolTimeWindow timeWindow) {
+        this.timeWindow = timeWindow;
     }
 
     public List<String> getRecurring() {

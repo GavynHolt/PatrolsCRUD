@@ -18,10 +18,11 @@ public class PatrolDateRange {
 
     @Column(name="end_date")
     private String end;
+
     @JsonBackReference
     @OneToOne(mappedBy="dateRange",
             cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private PostOrder postOrder;
+    private Patrol patrol;
 
     public PatrolDateRange() {
 
@@ -48,12 +49,12 @@ public class PatrolDateRange {
         this.end = end;
     }
 
-    public PostOrder getPostOrder() {
-        return postOrder;
+    public Patrol getPatrol() {
+        return patrol;
     }
 
-    public void setPostOrder(PostOrder postOrder) {
-        this.postOrder = postOrder;
+    public void setPatrol(Patrol patrol) {
+        this.patrol = patrol;
     }
 
     @Override
@@ -62,7 +63,7 @@ public class PatrolDateRange {
         sb.append("id=").append(id);
         sb.append(", start='").append(start).append('\'');
         sb.append(", end='").append(end).append('\'');
-        sb.append(", postOrder=").append(postOrder);
+        sb.append(", patrol=").append(patrol);
         sb.append('}');
         return sb.toString();
     }
