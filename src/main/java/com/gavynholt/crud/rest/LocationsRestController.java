@@ -4,10 +4,10 @@ import com.gavynholt.crud.entity.Location;
 import com.gavynholt.crud.entity.PostOrder;
 import com.gavynholt.crud.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -85,10 +85,10 @@ public class LocationsRestController {
     }
 
     @DeleteMapping("postorders/{postOrderId}")
-    public String deletePostorder(@PathVariable(value="postOrderId") int postOrderId) {
+    public ResponseEntity<String> deletePostorder(@PathVariable(value="postOrderId") int postOrderId) {
 
         locationService.deletePostOrder(postOrderId);
 
-        return "Successfully delete post order with id: " + postOrderId;
+        return new ResponseEntity<String>("Successfully delete post order with id: " + postOrderId, HttpStatus.OK);
     }
 }
