@@ -14,10 +14,10 @@ public class TimeWindow {
     private int id;
 
     @Column(name="start_time")
-    private String start;
+    private String startTime;
 
     @Column(name="end_time")
-    private String end;
+    private String endTime;
     @JsonBackReference
     @OneToOne(mappedBy="timeWindow",
             cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -27,8 +27,8 @@ public class TimeWindow {
     }
 
     public TimeWindow(String start, String end, Patrol patrol) {
-        this.start = start;
-        this.end = end;
+        this.startTime = start;
+        this.endTime = end;
         this.patrol = patrol;
     }
 
@@ -40,20 +40,20 @@ public class TimeWindow {
         this.id = id;
     }
 
-    public String getStart() {
-        return start;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public String getEnd() {
-        return end;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public void setEnd(String end) {
-        this.end = end;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public Patrol getPatrol() {
@@ -68,8 +68,8 @@ public class TimeWindow {
     public String toString() {
         final StringBuilder sb = new StringBuilder("TimeWindow{");
         sb.append("id=").append(id);
-        sb.append(", start='").append(start).append('\'');
-        sb.append(", end='").append(end).append('\'');
+        sb.append(", start='").append(startTime).append('\'');
+        sb.append(", end='").append(endTime).append('\'');
         sb.append(", patrol=").append(patrol);
         sb.append('}');
         return sb.toString();
