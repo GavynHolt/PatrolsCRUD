@@ -14,6 +14,9 @@ public class Patrol {
     @Column(name="patrol_name")
     private String name;
 
+    @Column(name="amount")
+    private int amount;
+
     @Column(name="notes")
     private String notes;
 
@@ -39,6 +42,14 @@ public class Patrol {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public String getNotes() {
