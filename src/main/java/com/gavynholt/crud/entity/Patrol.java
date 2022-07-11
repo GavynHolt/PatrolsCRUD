@@ -1,6 +1,7 @@
 package com.gavynholt.crud.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="patrol")
@@ -16,6 +17,14 @@ public class Patrol {
 
     @Column(name="amount")
     private int amount;
+
+    @ElementCollection
+    @CollectionTable(
+            name="patrol_recurring",
+            joinColumns=@JoinColumn(name="patrol_id")
+    )
+    @Column(name="day")
+    private List<String> recurring;
 
     @Column(name="notes")
     private String notes;
@@ -50,6 +59,14 @@ public class Patrol {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public List<String> getRecurring() {
+        return recurring;
+    }
+
+    public void setRecurring(List<String> recurring) {
+        this.recurring = recurring;
     }
 
     public String getNotes() {
