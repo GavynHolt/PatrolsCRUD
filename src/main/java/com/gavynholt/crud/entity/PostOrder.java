@@ -41,7 +41,7 @@ public class PostOrder {
 
     @JsonManagedReference
     @OneToMany(mappedBy="postOrder",
-            cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}
+            cascade={CascadeType.ALL}
     )
     private List<Patrol> patrols;
 
