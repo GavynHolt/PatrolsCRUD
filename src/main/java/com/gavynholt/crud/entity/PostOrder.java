@@ -43,7 +43,7 @@ public class PostOrder {
     @OneToMany(mappedBy="postOrder",
             cascade={CascadeType.ALL}
     )
-    private List<Patrol> patrols;
+    private List<PatrolCheck> patrolChecks;
 
     @Column(name="notes")
     private String notes;
@@ -93,12 +93,12 @@ public class PostOrder {
         this.recurring = recurring;
     }
 
-    public List<Patrol> getPatrols() {
-        return patrols;
+    public List<PatrolCheck> getPatrolChecks() {
+        return patrolChecks;
     }
 
-    public void setPatrols(List<Patrol> patrols) {
-        this.patrols = patrols;
+    public void setPatrolChecks(List<PatrolCheck> patrolChecks) {
+        this.patrolChecks = patrolChecks;
     }
 
     public String getNotes() {
@@ -125,7 +125,7 @@ public class PostOrder {
         sb.append(", steps=").append(steps);
         sb.append(", dateRange=").append(dateRange);
         sb.append(", recurring=").append(recurring);
-        sb.append(", patrols=").append(patrols);
+        sb.append(", patrolChecks=").append(patrolChecks);
         sb.append(", notes='").append(notes).append('\'');
         sb.append(", location=").append(location);
         sb.append('}');

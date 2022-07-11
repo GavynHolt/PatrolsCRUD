@@ -21,15 +21,15 @@ public class TimeWindow {
     @JsonBackReference
     @OneToOne(mappedBy="timeWindow",
             cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private Patrol patrol;
+    private PatrolCheck patrolCheck;
 
     public TimeWindow() {
     }
 
-    public TimeWindow(String start, String end, Patrol patrol) {
+    public TimeWindow(String start, String end, PatrolCheck patrolCheck) {
         this.startTime = start;
         this.endTime = end;
-        this.patrol = patrol;
+        this.patrolCheck = patrolCheck;
     }
 
     public int getId() {
@@ -56,12 +56,12 @@ public class TimeWindow {
         this.endTime = endTime;
     }
 
-    public Patrol getPatrol() {
-        return patrol;
+    public PatrolCheck getPatrolCheck() {
+        return patrolCheck;
     }
 
-    public void setPatrol(Patrol patrol) {
-        this.patrol = patrol;
+    public void setPatrolCheck(PatrolCheck patrol) {
+        this.patrolCheck = patrol;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class TimeWindow {
         sb.append("id=").append(id);
         sb.append(", start='").append(startTime).append('\'');
         sb.append(", end='").append(endTime).append('\'');
-        sb.append(", patrol=").append(patrol);
+        sb.append(", patrolCheck=").append(patrolCheck);
         sb.append('}');
         return sb.toString();
     }
