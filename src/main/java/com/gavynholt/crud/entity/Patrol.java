@@ -1,5 +1,7 @@
 package com.gavynholt.crud.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +19,11 @@ public class Patrol {
 
     @Column(name="amount")
     private int amount;
+
+    @JsonManagedReference
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="patrol_date_range_id")
+    private DateRange dateRange;
 
     @ElementCollection
     @CollectionTable(
@@ -59,6 +66,14 @@ public class Patrol {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public DateRange getDateRange() {
+        return dateRange;
+    }
+
+    public void setDateRange(DateRange dateRange) {
+        this.dateRange = dateRange;
     }
 
     public List<String> getRecurring() {
