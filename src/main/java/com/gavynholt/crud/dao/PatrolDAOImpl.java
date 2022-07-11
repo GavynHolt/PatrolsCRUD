@@ -27,4 +27,21 @@ public class PatrolDAOImpl implements  PatrolDAO {
 
         return scheduledPatrols;
     }
+
+    @Override
+    public void addNewPatrols(List<Patrol> patrolsToAdd) {
+
+        patrolsToAdd.forEach(patrolToAdd -> {
+            Patrol dbPatrol = entityManager.merge(patrolToAdd);
+            patrolToAdd.setId(dbPatrol.getId());
+        });
+    }
+
+    @Override
+    public void deletePatrol(int patrolId) {
+
+        Patrol patrolToDelete = entityManager.find(Patrol.class, patrolId);
+
+        entityManager.remove(patrolToDelete);
+    }
 }

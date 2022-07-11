@@ -20,4 +20,18 @@ public class PatrolServiceImpl implements PatrolService{
 
         return patrolDAO.getScheduledPatrols();
     }
+
+    @Override
+    @Transactional
+    public void addNewPatrols(List<Patrol> patrolsToAdd) {
+
+        patrolDAO.addNewPatrols(patrolsToAdd);
+    }
+
+    @Override
+    @Transactional
+    public void deletePatrol(int patrolId) {
+
+        patrolDAO.deletePatrol(patrolId);
+    }
 }
