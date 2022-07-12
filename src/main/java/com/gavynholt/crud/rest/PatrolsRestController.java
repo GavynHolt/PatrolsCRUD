@@ -1,6 +1,5 @@
 package com.gavynholt.crud.rest;
 
-import com.gavynholt.crud.entity.Location;
 import com.gavynholt.crud.entity.Patrol;
 import com.gavynholt.crud.service.PatrolService;
 import org.springframework.beans.factory.annotation.Autowired;
