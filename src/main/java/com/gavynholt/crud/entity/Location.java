@@ -37,7 +37,7 @@ public class Location {
 
     @JsonManagedReference
     @OneToMany(mappedBy="location",
-            cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}
+            cascade={CascadeType.ALL}
     )
     private List<PostOrder> postOrders;
 
