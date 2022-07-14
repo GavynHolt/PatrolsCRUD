@@ -29,6 +29,12 @@ public class PatrolDAOImpl implements  PatrolDAO {
     }
 
     @Override
+    public Patrol getPatrolById(int patrolId) {
+
+        return entityManager.find(Patrol.class, patrolId);
+    }
+
+    @Override
     public void addNewPatrols(List<Patrol> patrolsToAdd) {
 
         patrolsToAdd.forEach(patrolToAdd -> {

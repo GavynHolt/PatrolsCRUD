@@ -23,6 +23,13 @@ public class PatrolServiceImpl implements PatrolService{
 
     @Override
     @Transactional
+    public Patrol getPatrolById(int patrolId) {
+
+        return patrolDAO.getPatrolById(patrolId);
+    }
+
+    @Override
+    @Transactional
     public void addNewPatrols(List<Patrol> patrolsToAdd) {
 
         patrolDAO.addNewPatrols(patrolsToAdd);

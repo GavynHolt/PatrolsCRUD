@@ -20,6 +20,12 @@ public class PatrolsRestController {
         return patrolService.getScheduledPatrols();
     }
 
+    @GetMapping("patrols/{patrolId}")
+    public Patrol getPatrolById(@PathVariable(value="patrolId") int patrolId) {
+
+        return patrolService.getPatrolById(patrolId);
+    }
+
     @PostMapping("patrols")
     public List<Patrol> addNewPatrol(@RequestBody List<Patrol> patrolsToAdd) {
 
