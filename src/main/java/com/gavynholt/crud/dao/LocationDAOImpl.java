@@ -75,9 +75,13 @@ public class LocationDAOImpl implements LocationDAO {
     public void addPostOrder(PostOrder postOrderToAdd) {
 
         List<PatrolCheck> patrolChecksToUpdate = postOrderToAdd.getPatrolChecks();
+        List<PatrolCheck> dbPatrolChecks = entityManager.find(PostOrder.class, postOrderToAdd.getId()).getPatrolChecks();
 
-       patrolChecksToUpdate.forEach(patrolCheck -> {
-           entityManager.merge(patrolCheck);
+        // If there is a removed Patrol Check in patrolsChecksToUpdate, remove from DB
+        dbPatrolChecks.forEach(patrolCheck -> {
+            if (patrolChecksToUpdate.stream().noneMatch((patrolCheck1) -> patrolCheck1.getId() == patrolCheck.getId())) {
+                entityManager.remove(patrolCheck);
+            }
        });
 
         PostOrder dbPostOrder = entityManager.merge(postOrderToAdd);
