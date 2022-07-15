@@ -1,6 +1,7 @@
 package com.gavynholt.crud.dao;
 
 import com.gavynholt.crud.entity.Location;
+import com.gavynholt.crud.entity.PatrolCheck;
 import com.gavynholt.crud.entity.PostOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -72,6 +73,12 @@ public class LocationDAOImpl implements LocationDAO {
 
     @Override
     public void addPostOrder(PostOrder postOrderToAdd) {
+
+        List<PatrolCheck> patrolChecksToUpdate = postOrderToAdd.getPatrolChecks();
+
+       patrolChecksToUpdate.forEach(patrolCheck -> {
+           entityManager.merge(patrolCheck);
+       });
 
         PostOrder dbPostOrder = entityManager.merge(postOrderToAdd);
 
