@@ -74,16 +74,6 @@ public class LocationDAOImpl implements LocationDAO {
     @Override
     public void addPostOrder(PostOrder postOrderToAdd) {
 
-        List<PatrolCheck> patrolChecksToUpdate = postOrderToAdd.getPatrolChecks();
-        List<PatrolCheck> dbPatrolChecks = entityManager.find(PostOrder.class, postOrderToAdd.getId()).getPatrolChecks();
-
-        // If there is a removed Patrol Check in patrolsChecksToUpdate, remove from DB
-        dbPatrolChecks.forEach(patrolCheck -> {
-            if (patrolChecksToUpdate.stream().noneMatch((patrolCheck1) -> patrolCheck1.getId() == patrolCheck.getId())) {
-                entityManager.remove(patrolCheck);
-            }
-       });
-
         PostOrder dbPostOrder = entityManager.merge(postOrderToAdd);
 
         postOrderToAdd.setId(dbPostOrder.getId());
@@ -91,6 +81,15 @@ public class LocationDAOImpl implements LocationDAO {
 
     @Override
     public void updatePostOrder(PostOrder postOrderToUpdate) {
+        List<PatrolCheck> patrolChecksToUpdate = postOrderToUpdate.getPatrolChecks();
+        List<PatrolCheck> dbPatrolChecks = entityManager.find(PostOrder.class, postOrderToUpdate.getId()).getPatrolChecks();
+
+        // If there is a removed Patrol Check in patrolsChecksToUpdate, remove from DB
+        dbPatrolChecks.forEach(patrolCheck -> {
+            if (patrolChecksToUpdate.stream().noneMatch((patrolCheck1) -> patrolCheck1.getId() == patrolCheck.getId())) {
+                entityManager.remove(patrolCheck);
+            }
+        });
 
         entityManager.merge(postOrderToUpdate);
     }
