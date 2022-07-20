@@ -45,9 +45,9 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    public void updateLocation(Location locationToUpdate) {
+    public Location updateLocation(Location locationToUpdate) {
 
-        entityManager.merge(locationToUpdate);
+        return entityManager.merge(locationToUpdate);
     }
 
     @Override
