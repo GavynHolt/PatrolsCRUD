@@ -45,6 +45,12 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
+    public void updateLocation(Location locationToUpdate) {
+
+        entityManager.merge(locationToUpdate);
+    }
+
+    @Override
     public void deleteLocation(int locationId) {
 
         Location locationToDelete = entityManager.find(Location.class, locationId);
