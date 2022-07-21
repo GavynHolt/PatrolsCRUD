@@ -1,5 +1,6 @@
 package com.gavynholt.crud.dao;
 
+import antlr.StringUtils;
 import com.gavynholt.crud.entity.Location;
 import com.gavynholt.crud.entity.PatrolCheck;
 import com.gavynholt.crud.entity.PostOrder;
@@ -49,31 +50,31 @@ public class LocationDAOImpl implements LocationDAO {
 
         Location dbLocation = entityManager.find(Location.class, locationToUpdate.getId());
 
-        if (!dbLocation.getName().equals(locationToUpdate.getName())) {
+        if (locationToUpdate.getName() != null && !dbLocation.getName().equals(locationToUpdate.getName())) {
             dbLocation.setName(locationToUpdate.getName());
         }
 
-        if (!dbLocation.getAddress1().equals(locationToUpdate.getAddress1())) {
+        if (locationToUpdate.getAddress1() != null && !dbLocation.getAddress1().equals(locationToUpdate.getAddress1())) {
             dbLocation.setAddress1(locationToUpdate.getAddress1());
         }
 
-        if (!dbLocation.getAddress2().equals(locationToUpdate.getAddress2())) {
+        if (locationToUpdate.getAddress2() != null && !dbLocation.getAddress2().equals(locationToUpdate.getAddress2())) {
             dbLocation.setAddress2(locationToUpdate.getAddress2());
         }
 
-        if (!dbLocation.getCity().equals(locationToUpdate.getCity())) {
+        if (locationToUpdate.getCity() != null && !dbLocation.getCity().equals(locationToUpdate.getCity())) {
             dbLocation.setCity(locationToUpdate.getCity());
         }
 
-        if (!dbLocation.getState().equals(locationToUpdate.getState())) {
+        if (locationToUpdate.getState() != null && !dbLocation.getState().equals(locationToUpdate.getState())) {
             dbLocation.setState(locationToUpdate.getState());
         }
 
-        if (!dbLocation.getPostalCode().equals(locationToUpdate.getPostalCode())) {
+        if (locationToUpdate.getPostalCode() != null && !dbLocation.getPostalCode().equals(locationToUpdate.getPostalCode())) {
             dbLocation.setPostalCode(locationToUpdate.getPostalCode());
         }
 
-        if (!dbLocation.getCountry().equals(locationToUpdate.getCountry())) {
+        if (locationToUpdate.getCountry() != null && !dbLocation.getCountry().equals(locationToUpdate.getCountry())) {
             dbLocation.setCountry(locationToUpdate.getCountry());
         }
 
