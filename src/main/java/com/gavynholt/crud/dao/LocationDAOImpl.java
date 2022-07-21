@@ -45,9 +45,39 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    public Location updateLocation(Location locationToUpdate) {
+    public void updateLocation(Location locationToUpdate) {
 
-        return entityManager.merge(locationToUpdate);
+        Location dbLocation = entityManager.find(Location.class, locationToUpdate.getId());
+
+        if (!dbLocation.getName().equals(locationToUpdate.getName())) {
+            dbLocation.setName(locationToUpdate.getName());
+        }
+
+        if (!dbLocation.getAddress1().equals(locationToUpdate.getAddress1())) {
+            dbLocation.setAddress1(locationToUpdate.getAddress1());
+        }
+
+        if (!dbLocation.getAddress2().equals(locationToUpdate.getAddress2())) {
+            dbLocation.setAddress2(locationToUpdate.getAddress2());
+        }
+
+        if (!dbLocation.getCity().equals(locationToUpdate.getCity())) {
+            dbLocation.setCity(locationToUpdate.getCity());
+        }
+
+        if (!dbLocation.getState().equals(locationToUpdate.getState())) {
+            dbLocation.setState(locationToUpdate.getState());
+        }
+
+        if (!dbLocation.getPostalCode().equals(locationToUpdate.getPostalCode())) {
+            dbLocation.setPostalCode(locationToUpdate.getPostalCode());
+        }
+
+        if (!dbLocation.getCountry().equals(locationToUpdate.getCountry())) {
+            dbLocation.setCountry(locationToUpdate.getCountry());
+        }
+
+        entityManager.merge(dbLocation);
     }
 
     @Override

@@ -38,9 +38,9 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     @Transactional
-    public Location updateLocation(Location locationToUpdate) {
+    public void updateLocation(Location locationToUpdate) {
 
-        return locationDAO.updateLocation(locationToUpdate);
+        locationDAO.updateLocation(locationToUpdate);
     }
 
     @Override

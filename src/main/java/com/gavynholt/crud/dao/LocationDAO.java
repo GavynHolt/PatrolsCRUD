@@ -13,7 +13,7 @@ public interface LocationDAO {
 
     public void addNewLocation(Location locationToAdd);
 
-    public Location updateLocation(Location locationToUpdate);
+    public void updateLocation(Location locationToUpdate);
 
     public void deleteLocation(int locationId);
 

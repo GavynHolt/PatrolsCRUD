@@ -42,7 +42,9 @@ public class LocationsRestController {
     @PutMapping("locations")
     public Location updateLocation(@RequestBody Location locationToUpdate) {
 
-        return locationService.updateLocation(locationToUpdate);
+        locationService.updateLocation(locationToUpdate);
+
+        return locationService.getLocationById(locationToUpdate.getId());
     }
 
     @DeleteMapping("locations/{locationId}")
