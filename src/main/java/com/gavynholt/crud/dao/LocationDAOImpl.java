@@ -1,6 +1,8 @@
 package com.gavynholt.crud.dao;
 
+import antlr.StringUtils;
 import com.gavynholt.crud.entity.Location;
+import com.gavynholt.crud.entity.PatrolCheck;
 import com.gavynholt.crud.entity.PostOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,6 +46,42 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
+    public void updateLocation(Location locationToUpdate) {
+
+        Location dbLocation = entityManager.find(Location.class, locationToUpdate.getId());
+
+        if (locationToUpdate.getName() != null && !dbLocation.getName().equals(locationToUpdate.getName())) {
+            dbLocation.setName(locationToUpdate.getName());
+        }
+
+        if (locationToUpdate.getAddress1() != null && !dbLocation.getAddress1().equals(locationToUpdate.getAddress1())) {
+            dbLocation.setAddress1(locationToUpdate.getAddress1());
+        }
+
+        if (locationToUpdate.getAddress2() != null && !dbLocation.getAddress2().equals(locationToUpdate.getAddress2())) {
+            dbLocation.setAddress2(locationToUpdate.getAddress2());
+        }
+
+        if (locationToUpdate.getCity() != null && !dbLocation.getCity().equals(locationToUpdate.getCity())) {
+            dbLocation.setCity(locationToUpdate.getCity());
+        }
+
+        if (locationToUpdate.getState() != null && !dbLocation.getState().equals(locationToUpdate.getState())) {
+            dbLocation.setState(locationToUpdate.getState());
+        }
+
+        if (locationToUpdate.getPostalCode() != null && !dbLocation.getPostalCode().equals(locationToUpdate.getPostalCode())) {
+            dbLocation.setPostalCode(locationToUpdate.getPostalCode());
+        }
+
+        if (locationToUpdate.getCountry() != null && !dbLocation.getCountry().equals(locationToUpdate.getCountry())) {
+            dbLocation.setCountry(locationToUpdate.getCountry());
+        }
+
+        entityManager.merge(dbLocation);
+    }
+
+    @Override
     public void deleteLocation(int locationId) {
 
         Location locationToDelete = entityManager.find(Location.class, locationId);
@@ -80,6 +118,15 @@ public class LocationDAOImpl implements LocationDAO {
 
     @Override
     public void updatePostOrder(PostOrder postOrderToUpdate) {
+        List<PatrolCheck> patrolChecksToUpdate = postOrderToUpdate.getPatrolChecks();
+        List<PatrolCheck> dbPatrolChecks = entityManager.find(PostOrder.class, postOrderToUpdate.getId()).getPatrolChecks();
+
+        // If there is a removed Patrol Check in patrolsChecksToUpdate, remove from DB
+        dbPatrolChecks.forEach(patrolCheck -> {
+            if (patrolChecksToUpdate.stream().noneMatch((patrolCheck1) -> patrolCheck1.getId() == patrolCheck.getId())) {
+                entityManager.remove(patrolCheck);
+            }
+        });
 
         entityManager.merge(postOrderToUpdate);
     }

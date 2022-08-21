@@ -39,6 +39,14 @@ public class LocationsRestController {
         return locationToAdd;
     }
 
+    @PutMapping("locations")
+    public Location updateLocation(@RequestBody Location locationToUpdate) {
+
+        locationService.updateLocation(locationToUpdate);
+
+        return locationService.getLocationById(locationToUpdate.getId());
+    }
+
     @DeleteMapping("locations/{locationId}")
     public String deleteLocation(@PathVariable(value="locationId") int locationId) {
 

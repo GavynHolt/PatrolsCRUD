@@ -13,6 +13,8 @@ public interface LocationService {
 
     public void addNewLocation(Location locationToAdd);
 
+    public void updateLocation(Location locationToUpdate);
+
     public void deleteLocation(int locationId);
 
     public List<PostOrder> getPostOrders(int locationId);
