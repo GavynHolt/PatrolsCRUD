@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://https://localhost:4200")
+@CrossOrigin(origins = "https://http://localhost:4200")
 @RequestMapping("api")
 public class PatrolsRestController {
 
