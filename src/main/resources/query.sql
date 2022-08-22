@@ -1,51 +1,51 @@
-DROP TABLE IF EXISTS post_order;
-DROP TABLE IF EXISTS date_range;
-DROP TABLE IF EXISTS location;
-DROP TABLE IF EXISTS step;
-DROP TABLE IF EXISTS recurring;
-DROP TABLE IF EXISTS time_window;
-DROP TABLE IF EXISTS patrol_check;
-DROP TABLE IF EXISTS patrol_recurring;
-DROP TABLE IF EXISTS patrol_time_window;
-DROP TABLE IF EXISTS patrol_date_range;
-DROP TABLE IF EXISTS patrol;
+DROP TABLE IF EXISTS post_order CASCADE;
+DROP TABLE IF EXISTS date_range CASCADE;
+DROP TABLE IF EXISTS location CASCADE;
+DROP TABLE IF EXISTS step CASCADE;
+DROP TABLE IF EXISTS recurring CASCADE;
+DROP TABLE IF EXISTS time_window CASCADE;
+DROP TABLE IF EXISTS patrol_check CASCADE;
+DROP TABLE IF EXISTS patrol_recurring CASCADE;
+DROP TABLE IF EXISTS patrol_time_window CASCADE;
+DROP TABLE IF EXISTS patrol_date_range CASCADE;
+DROP TABLE IF EXISTS patrol CASCADE;
 
 CREATE TABLE location(
-    location_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-    name VARCHAR(150) NOT NULL,
-    address1 VARCHAR(150) NOT NULL,
-    address2 VARCHAR(150),
-    city VARCHAR(150) NOT NULL,
-    state VARCHAR(150) NOT NULL,
-    postal_code VARCHAR(150) NOT NULL,
-    country VARCHAR(150) NOT NULL,
+    location_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    address1 VARCHAR(255) NOT NULL,
+    address2 VARCHAR(255),
+    city VARCHAR(255) NOT NULL,
+    state VARCHAR(255) NOT NULL,
+    postal_code VARCHAR(255) NOT NULL,
+    country VARCHAR(255) NOT NULL
 );
 
 INSERT INTO location(name, address1, city, state, postal_code, country)
 VALUES
-    ('Test Location', '123 Fake Street', 'Toronto', 'ON', 'M6Z 1Z3', 'Canada'),
-    ('Gavyns House', '42 Dayton Ave', 'Toronto', 'ON', 'M8Z 3L7', 'Canada'),
-    ('My Backyard', '555 Test St.' , 'Toronto', 'ON', 'M8Z 3L9', 'Canada'),
-    ('Another Location', 'Avenue Unknown', 'Barrie', 'ON', 'L4N 2P5', 'Canada');
+    ('Heroku Test Location', '123 Fake Street', 'Toronto', 'ON', 'M6Z 1Z3', 'Canada'),
+    ('Gavyns House (Heroku)', '42 Dayton Ave', 'Toronto', 'ON', 'M8Z 3L7', 'Canada'),
+    ('My Heroku Backyard', '555 Test St.' , 'Toronto', 'ON', 'M8Z 3L9', 'Canada'),
+    ('Another Heroku Location', 'Avenue Unknown', 'Barrie', 'ON', 'L4N 2P5', 'Canada');
 
 CREATE TABLE date_range(
-	date_range_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	start_date VARCHAR(150) NOT NULL,
-	end_date VARCHAR(150) NOT NULL,
+	date_range_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	start_date VARCHAR(255) NOT NULL,
+	end_date VARCHAR(255) NOT NULL
 );
 
 INSERT INTO date_range(start_date, end_date)
-VALUES 
+VALUES
 	('2022-04-01', '2022-04-10'),
 	('2022-03-01', '2022-07-01'),
 	('2022-06-15', '2022-07-12');
 
 CREATE TABLE post_order(
-    post_order_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-    name VARCHAR(150) NOT NULL,
-	notes VARCHAR(150),
-    location_id int FOREIGN KEY REFERENCES location(location_id),
-	date_range_id int FOREIGN KEY REFERENCES date_range(date_range_id)
+    post_order_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255) NOT NULL,
+	notes VARCHAR(255),
+    location_id INT REFERENCES location(location_id),
+	date_range_id INT REFERENCES date_range(date_range_id)
 );
 
 INSERT INTO post_order(name, notes, location_id, date_range_id)
@@ -55,9 +55,9 @@ VALUES
 	('Example Order', 'Please note that a note is not required.', 3, 3);
 
 CREATE TABLE step(
-	step_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	name VARCHAR(150) NOT NULL,
-	post_order_id int FOREIGN KEY REFERENCES post_order(post_order_id)
+	step_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	name VARCHAR(255) NOT NULL,
+	post_order_id INT REFERENCES post_order(post_order_id)
 );
 
 INSERT INTO step (name, post_order_id)
@@ -67,9 +67,9 @@ VALUES
 	('Run away', 2);
 
 CREATE TABLE recurring(
-	recurring_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	day VARCHAR(150) NOT NULL,
-	post_order_id int FOREIGN KEY REFERENCES post_order(post_order_id)
+	recurring_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	day VARCHAR(255) NOT NULL,
+	post_order_id INT REFERENCES post_order(post_order_id)
 );
 
 INSERT INTO recurring (day, post_order_id)
@@ -78,15 +78,15 @@ VALUES
 	('tuesday', 1),
 	('thursday', 1),
 	('friday', 1),
-	('saturday', 2), 
+	('saturday', 2),
 	('sunday', 2),
 	('friday', 3);
 
 CREATE TABLE time_window(
-	time_window_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	start_time VARCHAR(150) NOT NULL,
-	end_time VARCHAR(150) NOT NULL,
-);	
+	time_window_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	start_time VARCHAR(255) NOT NULL,
+	end_time VARCHAR(255) NOT NULL
+);
 
 INSERT INTO time_window (start_time, end_time)
 VALUES
@@ -95,32 +95,32 @@ VALUES
 	('08:00', '12:00');
 
 CREATE TABLE patrol_check(
-	patrol_check_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	patrol_check_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	amount int NOT NULL,
-	post_order_id int FOREIGN KEY REFERENCES post_order(post_order_id),
-	time_window_id int FOREIGN KEY REFERENCES time_window(time_window_id)
+	post_order_id INT REFERENCES post_order(post_order_id),
+	time_window_id INT REFERENCES time_window(time_window_id)
 );
 
-INSERT INTO patrol_check (amount, post_order_id, time_window_id) 
+INSERT INTO patrol_check (amount, post_order_id, time_window_id)
 VALUES
 	(1, 1, 1),
 	(3, 1, 2),
 	(5, 3, 3);
 
 CREATE TABLE patrol_date_range(
-	patrol_date_range_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	start_date VARCHAR(150) NOT NULL,
-	end_date VARCHAR(150) NOT NULL,
+	patrol_date_range_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	start_date VARCHAR(255) NOT NULL,
+	end_date VARCHAR(255) NOT NULL
 );
 
 INSERT INTO patrol_date_range(start_date, end_date)
-VALUES 
+VALUES
 	('2022-04-01', '2022-04-10');
 
 CREATE TABLE patrol_time_window(
-	patrol_time_window_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	start_time VARCHAR(150) NOT NULL,
-	end_time VARCHAR(150) NOT NULL,
+	patrol_time_window_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	start_time VARCHAR(255) NOT NULL,
+	end_time VARCHAR(255) NOT NULL
 );
 
 INSERT INTO patrol_time_window (start_time, end_time)
@@ -129,21 +129,21 @@ VALUES
 
 
 CREATE TABLE patrol(
-	patrol_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	patrol_name VARCHAR(150) NOT NULL,
+	patrol_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	patrol_name VARCHAR(255) NOT NULL,
 	amount int NOT NULL,
-	notes VARCHAR(150),
-	patrol_date_range_id int FOREIGN KEY REFERENCES patrol_date_range(patrol_date_range_id),
-	patrol_time_window_id int FOREIGN KEY REFERENCES patrol_time_window(patrol_time_window_id)
+	notes VARCHAR(255),
+	patrol_date_range_id INT REFERENCES patrol_date_range(patrol_date_range_id),
+	patrol_time_window_id INT REFERENCES patrol_time_window(patrol_time_window_id)
 );
 
 INSERT INTO patrol(patrol_name, amount, patrol_date_range_id, patrol_time_window_id, notes)
 VALUES ('Test patrol', 2, 1, 1, 'Notes go here');
 
 CREATE TABLE patrol_recurring(
-	recurring_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	day VARCHAR(150) NOT NULL,
-	patrol_id int FOREIGN KEY REFERENCES patrol(patrol_id)
+	recurring_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	day VARCHAR(255) NOT NULL,
+	patrol_id INT REFERENCES patrol(patrol_id)
 );
 
 INSERT INTO patrol_recurring (day, patrol_id)
