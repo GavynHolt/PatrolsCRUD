@@ -4,6 +4,7 @@ import antlr.StringUtils;
 import com.gavynholt.crud.entity.Location;
 import com.gavynholt.crud.entity.PatrolCheck;
 import com.gavynholt.crud.entity.PostOrder;
+import com.gavynholt.crud.entity.Step;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -122,9 +123,19 @@ public class LocationDAOImpl implements LocationDAO {
         List<PatrolCheck> dbPatrolChecks = entityManager.find(PostOrder.class, postOrderToUpdate.getId()).getPatrolChecks();
 
         // If there is a removed Patrol Check in patrolsChecksToUpdate, remove from DB
-        dbPatrolChecks.forEach(patrolCheck -> {
-            if (patrolChecksToUpdate.stream().noneMatch((patrolCheck1) -> patrolCheck1.getId() == patrolCheck.getId())) {
-                entityManager.remove(patrolCheck);
+        dbPatrolChecks.forEach(dbPatrolCheck -> {
+            if (patrolChecksToUpdate.stream().noneMatch((updatedPatrolCheck) -> updatedPatrolCheck.getId() == dbPatrolCheck.getId())) {
+                entityManager.remove(dbPatrolCheck);
+            }
+        });
+
+        List<Step> stepsToUpdate = postOrderToUpdate.getSteps();
+        List<Step> dbSteps = entityManager.find(PostOrder.class, postOrderToUpdate.getId()).getSteps();
+
+        // If there is a removed Step in stepsToUpdate, remove from DB
+        dbSteps.forEach(dbStep -> {
+            if (stepsToUpdate.stream().noneMatch((updatedStep) -> updatedStep.getId() == dbStep.getId())) {
+                entityManager.remove(dbStep);
             }
         });
 
