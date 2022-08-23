@@ -19,7 +19,9 @@ public class PostOrder {
     private String name;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "postOrder")
+    @OneToMany(mappedBy = "postOrder",
+            cascade = {CascadeType.ALL}
+    )
     private List<Step> steps;
 
     @JsonManagedReference
