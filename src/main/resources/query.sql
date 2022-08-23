@@ -107,8 +107,8 @@ CREATE TABLE patrol_check(
 INSERT INTO patrol_check (amount,  post_order_id, time_window_id, notes)
 VALUES
 	(1, 1, 1, 'This is a patrol check specific note.'),
-	(3, 1, 2 'For this patrol check only.'),
-	(5, 3, 3 'RE: this patrol check, John will be the manager on duty during this time.');
+	(3, 1, 2, 'For this patrol check only.'),
+	(5, 3, 3, 'RE: this patrol check, John will be the manager on duty during this time.');
 
 CREATE TABLE patrol_date_range(
 	patrol_date_range_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
