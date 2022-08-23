@@ -21,6 +21,9 @@ public class PatrolCheck {
     @JoinColumn(name="time_window_id")
     private TimeWindow timeWindow;
 
+    @Column(name = "notes")
+    private String notes;
+
     @JsonBackReference
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="post_order_id")
@@ -58,6 +61,14 @@ public class PatrolCheck {
         this.timeWindow = timeWindow;
     }
 
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     public PostOrder getPostOrder() {
         return postOrder;
     }
@@ -72,6 +83,7 @@ public class PatrolCheck {
         sb.append("id=").append(id);
         sb.append(", amount=").append(amount);
         sb.append(", timeWindow=").append(timeWindow);
+        sb.append(", notes=").append(notes);
         sb.append(", postOrder=").append(postOrder);
         sb.append('}');
         return sb.toString();
