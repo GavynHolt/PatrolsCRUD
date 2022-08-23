@@ -64,9 +64,9 @@ CREATE TABLE step(
 
 INSERT INTO step (name, photo_required, escalation_contact, post_order_id)
 VALUES
-	('Front Cash secure?', false, "General Manager", 1),
-	('Back Door locked?', true, "Location Manager"  1),
-	('No vandalism or damage?', true, "Vice President", 2);
+	('Front Cash secure?', false, 'General Manager', 1),
+	('Back Door locked?', true, 'Location Manager',  1),
+	('No vandalism or damage?', true, 'Vice President', 2);
 
 CREATE TABLE recurring(
 	recurring_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
