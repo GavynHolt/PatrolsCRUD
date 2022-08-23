@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="post_order")
+@Table(name = "post_order")
 public class PostOrder {
 
     @Id
@@ -18,39 +18,35 @@ public class PostOrder {
     @Column(name="name")
     private String name;
 
-    @ElementCollection
-    @CollectionTable(
-            name="step",
-            joinColumns=@JoinColumn(name="post_order_id")
-    )
-    @Column(name="name")
-    private List<String> steps;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "postOrder")
+    private List<Step> steps;
 
     @JsonManagedReference
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="date_range_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "date_range_id")
     private DateRange dateRange;
 
     @ElementCollection
     @CollectionTable(
-            name="recurring",
-            joinColumns=@JoinColumn(name="post_order_id")
+            name = "recurring",
+            joinColumns = @JoinColumn(name="post_order_id")
     )
     @Column(name="day")
     private List<String> recurring;
 
     @JsonManagedReference
-    @OneToMany(mappedBy="postOrder",
-            cascade={CascadeType.ALL}
+    @OneToMany(mappedBy = "postOrder",
+            cascade = {CascadeType.ALL}
     )
     private List<PatrolCheck> patrolChecks;
 
-    @Column(name="notes")
+    @Column(name = "notes")
     private String notes;
 
     @JsonBackReference
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="location_id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "location_id")
     private Location location;
 
     public int getId() {
@@ -69,11 +65,11 @@ public class PostOrder {
         this.name = name;
     }
 
-    public List<String> getSteps() {
+    public List<Step> getSteps() {
         return steps;
     }
 
-    public void setSteps(List<String> steps) {
+    public void setSteps(List<Step> steps) {
         this.steps = steps;
     }
 

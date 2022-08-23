@@ -57,14 +57,16 @@ VALUES
 CREATE TABLE step(
 	step_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	name VARCHAR(255) NOT NULL,
+	photo_required BOOLEAN,
+	escalation_contact VARCHAR(255),
 	post_order_id INT REFERENCES post_order(post_order_id)
 );
 
-INSERT INTO step (name, post_order_id)
+INSERT INTO step (name, photo_required, escalation_contact, post_order_id)
 VALUES
-	('Walk the dog', 1),
-	('Say Hello', 1),
-	('Run away', 2);
+	('Front Cash secure?', false, "General Manager", 1),
+	('Back Door locked?', true, "Location Manager"  1),
+	('No vandalism or damage?', true, "Vice President", 2);
 
 CREATE TABLE recurring(
 	recurring_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
