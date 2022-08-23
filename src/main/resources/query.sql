@@ -135,7 +135,8 @@ CREATE TABLE patrol(
 	patrol_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	patrol_name VARCHAR(255) NOT NULL,
 	amount int NOT NULL,
-	notes VARCHAR(255),
+	post_order_notes VARCHAR(255),
+	patrol_check_notes VARCHAR(255),
 	patrol_date_range_id INT REFERENCES patrol_date_range(patrol_date_range_id),
 	patrol_time_window_id INT REFERENCES patrol_time_window(patrol_time_window_id)
 );

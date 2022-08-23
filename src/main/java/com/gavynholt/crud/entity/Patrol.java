@@ -37,15 +37,18 @@ public class Patrol {
     @Column(name="day")
     private List<String> recurring;
 
-    @Column(name="notes")
-    private String notes;
+    @Column(name="post_order_notes")
+    private String postOrderNotes;
+
+    @Column(name="patrol_check_notes")
+    private String patrolCheckNotes;
 
     public Patrol() {
     }
 
-    public Patrol(String name, String notes) {
+    public Patrol(String name, String postOrderNotes) {
         this.name = name;
-        this.notes = notes;
+        this.postOrderNotes = postOrderNotes;
     }
 
     public int getId() {
@@ -96,11 +99,19 @@ public class Patrol {
         this.recurring = recurring;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getPostOrderNotes() {
+        return postOrderNotes;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setPostOrderNotes(String postOrderNotes) {
+        this.postOrderNotes = postOrderNotes;
+    }
+
+    public String getPatrolCheckNotes() {
+        return patrolCheckNotes;
+    }
+
+    public void setPatrolCheckNotes(String patrolCheckNotes) {
+        this.patrolCheckNotes = patrolCheckNotes;
     }
 }
