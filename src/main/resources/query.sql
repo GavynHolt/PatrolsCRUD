@@ -141,8 +141,8 @@ CREATE TABLE patrol(
 	patrol_time_window_id INT REFERENCES patrol_time_window(patrol_time_window_id)
 );
 
-INSERT INTO patrol(patrol_name, amount, patrol_date_range_id, patrol_time_window_id, notes)
-VALUES ('Test patrol', 2, 1, 1, 'Notes go here');
+INSERT INTO patrol(patrol_name, amount, patrol_date_range_id, patrol_time_window_id, post_order_notes, patrol_check_notes)
+VALUES ('Test patrol', 2, 1, 1, 'General notes go here', 'These are notes specific to the patrol check!');
 
 CREATE TABLE patrol_recurring(
 	recurring_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
