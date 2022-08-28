@@ -30,14 +30,19 @@ public class LocationsRestController {
     @GetMapping("locations/{locationId}")
     public Location getLocationById(@PathVariable int locationId) {
 
-        return locationService.getLocationById(locationId);
+        Location location = locationService.getLocationById(locationId);
+
+        if (location == null) {
+            throw new NotFoundException("Location not found with ID: " + locationId);
+        }
+
+        return location;
     }
 
     @PostMapping("locations")
     public Location addNewLocation(@RequestBody Location locationToAdd) {
 
         locationToAdd.setId(0);
-
         locationService.addNewLocation(locationToAdd);
 
         return locationToAdd;
@@ -54,6 +59,12 @@ public class LocationsRestController {
     @DeleteMapping("locations/{locationId}")
     public String deleteLocation(@PathVariable(value="locationId") int locationId) {
 
+        Location location = locationService.getLocationById(locationId);
+
+        if (location == null) {
+            throw new NotFoundException("Location not found with ID: " + locationId);
+        }
+
         locationService.deleteLocation(locationId);
 
         return "Successfully deleted location with id: " + locationId;
@@ -62,13 +73,25 @@ public class LocationsRestController {
     @GetMapping("postorders/location/{locationId}")
     public List<PostOrder> getPostOrders(@PathVariable(value="locationId") int locationId) {
 
-        return locationService.getPostOrders(locationId);
+        List<PostOrder> postOrders = locationService.getPostOrders(locationId);
+
+        if ( postOrders == null) {
+            throw new NotFoundException("Location not found with ID: " + locationId);
+        }
+
+        return postOrders;
     }
 
     @GetMapping("postorders/{postOrderId}")
     public PostOrder getPostOrder(@PathVariable(value="postOrderId") int postOrderId) {
 
-        return locationService.getPostOrderById(postOrderId);
+        PostOrder postOrder = locationService.getPostOrderById(postOrderId);
+
+        if (postOrder == null) {
+            throw new NotFoundException("Post Order not found with ID: " + postOrderId);
+        }
+
+        return postOrder;
     }
 
     @PostMapping("postorders/location/{locationId}")
@@ -77,6 +100,11 @@ public class LocationsRestController {
         postOrderToAdd.setId(0);
 
         Location postOrderLocation = locationService.getLocationById(locationId);
+
+        if (postOrderLocation == null) {
+            throw new NotFoundException("Location not found with ID: " + locationId);
+        }
+
         postOrderToAdd.setLocation(postOrderLocation);
 
         locationService.addPostOrder(postOrderToAdd);
@@ -88,6 +116,11 @@ public class LocationsRestController {
     public PostOrder updatePostOrder(@PathVariable(value="locationId") int locationId, @RequestBody PostOrder postOrderToUpdate) {
 
         Location postOrderLocation = locationService.getLocationById(locationId);
+
+        if (postOrderLocation == null) {
+            throw new NotFoundException("Location not found with ID: " + locationId);
+        }
+
         postOrderToUpdate.setLocation(postOrderLocation);
 
         locationService.updatedPostOrder(postOrderToUpdate);
@@ -97,6 +130,12 @@ public class LocationsRestController {
 
     @DeleteMapping("postorders/{postOrderId}")
     public ResponseEntity<String> deletePostorder(@PathVariable(value="postOrderId") int postOrderId) {
+
+        PostOrder postOrder = locationService.getPostOrderById(postOrderId);
+
+        if (postOrder == null) {
+            throw new NotFoundException("Post Order not found with ID: " + postOrderId);
+        }
 
         locationService.deletePostOrder(postOrderId);
 

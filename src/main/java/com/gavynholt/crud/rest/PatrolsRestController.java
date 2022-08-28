@@ -27,7 +27,13 @@ public class PatrolsRestController {
     @GetMapping("patrols/{patrolId}")
     public Patrol getPatrolById(@PathVariable(value="patrolId") int patrolId) {
 
-        return patrolService.getPatrolById(patrolId);
+        Patrol patrol = patrolService.getPatrolById(patrolId);
+
+        if (patrol == null) {
+            throw new NotFoundException("Patrol not found with ID: " + patrolId);
+        }
+
+        return patrol;
     }
 
     @PostMapping("patrols")
@@ -42,6 +48,12 @@ public class PatrolsRestController {
 
     @DeleteMapping("patrols/{patrolId}")
     public String deletePatrol(@PathVariable(value="patrolId") int patrolId) {
+
+        Patrol patrol = patrolService.getPatrolById(patrolId);
+
+        if (patrol == null) {
+            throw new NotFoundException("Patrol not found with ID: " + patrolId);
+        }
 
         patrolService.deletePatrol(patrolId);
 
