@@ -38,7 +38,7 @@ INSERT INTO date_range(start_date, end_date)
 VALUES
 	('2022-04-01', '2022-04-10'),
 	('2022-03-01', '2022-07-01'),
-	('2022-06-15');
+	('2022-06-15', NULL);
 
 CREATE TABLE post_order(
     post_order_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
