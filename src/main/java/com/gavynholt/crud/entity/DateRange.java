@@ -18,6 +18,10 @@ public class DateRange {
 
     @Column(name="end_date")
     private String end;
+
+    @Column(name="no_end_date_selected")
+    private Boolean noEndDateSelected;
+
     @JsonBackReference
     @OneToOne(mappedBy="dateRange",
             cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -30,6 +34,14 @@ public class DateRange {
     public DateRange(String start, String end) {
         this.start = start;
         this.end = end;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStart() {
@@ -46,6 +58,14 @@ public class DateRange {
 
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    public Boolean getNoEndDateSelected() {
+        return noEndDateSelected;
+    }
+
+    public void setNoEndDateSelected(Boolean noEndDateSelected) {
+        this.noEndDateSelected = noEndDateSelected;
     }
 
     public PostOrder getPostOrder() {
