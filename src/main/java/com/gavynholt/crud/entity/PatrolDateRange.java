@@ -36,6 +36,14 @@ public class PatrolDateRange {
         this.end = end;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getStart() {
         return start;
     }
