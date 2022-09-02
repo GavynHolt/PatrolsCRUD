@@ -19,6 +19,9 @@ public class PatrolDateRange {
     @Column(name="end_date")
     private String end;
 
+    @Column(name="no_end_date_selected")
+    private Boolean noEndDateSelected;
+
     @JsonBackReference
     @OneToOne(mappedBy="dateRange",
             cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -47,6 +50,14 @@ public class PatrolDateRange {
 
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    public Boolean getNoEndDateSelected() {
+        return noEndDateSelected;
+    }
+
+    public void setNoEndDateSelected(Boolean noEndDateSelected) {
+        this.noEndDateSelected = noEndDateSelected;
     }
 
     public Patrol getPatrol() {

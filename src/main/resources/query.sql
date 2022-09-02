@@ -31,14 +31,15 @@ VALUES
 CREATE TABLE date_range(
 	date_range_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	start_date VARCHAR(255) NOT NULL,
-	end_date VARCHAR(255)
+	end_date VARCHAR(255),
+	no_end_date_selected BOOLEAN
 );
 
-INSERT INTO date_range(start_date, end_date)
+INSERT INTO date_range(start_date, end_date, no_end_date_selected)
 VALUES
-	('2022-04-01', '2022-04-10'),
-	('2022-03-01', '2022-07-01'),
-	('2022-06-15', NULL);
+	('2022-04-01', '2022-04-10', FALSE),
+	('2022-03-01', '2022-07-01', FALSE),
+	('2022-06-15', NULL, TRUE);
 
 CREATE TABLE post_order(
     post_order_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
