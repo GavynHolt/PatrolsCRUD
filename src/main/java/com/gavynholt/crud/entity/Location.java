@@ -35,6 +35,12 @@ public class Location {
     @Column(name="country")
     private String country;
 
+    @Column(name="latitude")
+    private int latitude;
+
+    @Column(name="longitude")
+    private int longitude;
+
     @JsonManagedReference
     @OneToMany(mappedBy="location",
             cascade={CascadeType.ALL}
@@ -120,6 +126,22 @@ public class Location {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public int getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(int latitude) {
+        this.latitude = latitude;
+    }
+
+    public int getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(int longitude) {
+        this.longitude = longitude;
     }
 
     public List<PostOrder> getPostOrders() {
