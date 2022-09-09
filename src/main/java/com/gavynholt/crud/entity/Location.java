@@ -36,10 +36,10 @@ public class Location {
     private String country;
 
     @Column(name="latitude")
-    private int latitude;
+    private Integer latitude;
 
     @Column(name="longitude")
-    private int longitude;
+    private Integer longitude;
 
     @JsonManagedReference
     @OneToMany(mappedBy="location",
@@ -128,19 +128,19 @@ public class Location {
         this.country = country;
     }
 
-    public int getLatitude() {
+    public Integer getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(Integer latitude) {
         this.latitude = latitude;
     }
 
-    public int getLongitude() {
+    public Integer getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(Integer longitude) {
         this.longitude = longitude;
     }
 
