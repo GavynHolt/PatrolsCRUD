@@ -114,7 +114,7 @@ VALUES
 CREATE TABLE patrol_date_range(
 	patrol_date_range_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	start_date VARCHAR(255) NOT NULL,
-	end_date VARCHAR(255) NOT NULL
+	end_date VARCHAR(255)
 );
 
 INSERT INTO patrol_date_range(start_date, end_date)
