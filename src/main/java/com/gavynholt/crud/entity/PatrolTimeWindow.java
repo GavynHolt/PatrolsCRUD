@@ -40,6 +40,7 @@ public class PatrolTimeWindow {
         this.startTime = startTime;
     }
 
+
     public String getEndTime() {
         return endTime;
     }

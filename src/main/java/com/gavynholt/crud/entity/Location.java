@@ -41,6 +41,10 @@ public class Location {
     @Column(name="longitude")
     private Double longitude;
 
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="location_contact_id")
+    private LocationContact locationContact;
+
     @JsonManagedReference
     @OneToMany(mappedBy="location",
             cascade={CascadeType.ALL}
@@ -142,6 +146,14 @@ public class Location {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public LocationContact getLocationContact() {
+        return locationContact;
+    }
+
+    public void setLocationContact(LocationContact locationContact) {
+        this.locationContact = locationContact;
     }
 
     public List<PostOrder> getPostOrders() {
