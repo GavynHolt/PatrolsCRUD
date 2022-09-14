@@ -1,4 +1,6 @@
 package com.gavynholt.crud.entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -25,6 +27,7 @@ public class LocationContact {
     @Column(name = "email")
     private String email;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "locationContact",
             cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Location location;
