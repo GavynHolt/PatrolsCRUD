@@ -79,6 +79,14 @@ public class LocationDAOImpl implements LocationDAO {
             dbLocation.setCountry(locationToUpdate.getCountry());
         }
 
+        if (locationToUpdate.getLatitude() != null && !dbLocation.getLatitude().equals(locationToUpdate.getLatitude())) {
+            dbLocation.setLatitude(locationToUpdate.getLatitude());
+        }
+
+        if (locationToUpdate.getLongitude() != null && !dbLocation.getLongitude().equals(locationToUpdate.getLongitude())) {
+            dbLocation.setLongitude((locationToUpdate.getLongitude()));
+        }
+
         entityManager.merge(dbLocation);
     }
 
