@@ -14,6 +14,7 @@ import java.util.List;
 @CrossOrigin(origins = {
         "http://localhost:4200",
         "https://patrol.staging.rspndr.io",
+        "https://patrol.rspndr.io"
 })
 @RequestMapping("api")
 public class LocationsRestController {

@@ -10,7 +10,8 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = {
         "http://localhost:4200",
-        "https://patrol.staging.rspndr.io"
+        "https://patrol.staging.rspndr.io",
+        "https://patrol.rspndr.io"
 })
 @RequestMapping("api")
 public class PatrolsRestController {
